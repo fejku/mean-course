@@ -43,7 +43,11 @@ app.get('/api/posts', (req, res, next) => {
   Post.find().then(posts => {
     res.status(200).json({
       message: 'Post fetched successfully!',
-      posts: posts,
+      posts: posts.map(post => ({
+        id: post._id,
+        title: post.title,
+        content: post.content,
+      })),
     });
   });
 });
